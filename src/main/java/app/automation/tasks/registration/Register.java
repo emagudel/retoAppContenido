@@ -35,4 +35,24 @@ public class Register {
         });
     }
 
+    public static Performable inAppEmpty() {
+        return Task.where(actor -> {
+            actor.attemptsTo(Click.on(BTN_SUBMIT));
+        });
+    }
+
+    public static Performable inAppNoUsername(String password) {
+        return Task.where(actor -> {
+            actor.attemptsTo(Click.on(TXT_PASSWORD).afterWaitingUntilPresent());
+            actor.attemptsTo(Enter.theValue(password).into(TXT_PASSWORD));
+            actor.attemptsTo(Click.on(TXT_REPEAT_PASSWORD).afterWaitingUntilPresent());
+            actor.attemptsTo(Enter.theValue(password).into(TXT_REPEAT_PASSWORD));
+            actor.attemptsTo(Click.on(BTN_SUBMIT));
+            if(POPUP_EMAIL.resolveFor(actor).isVisible()){
+                actor.attemptsTo(Click.on(BTN_CONFIRM));
+                actor.attemptsTo(Esperar.segundos(2));
+            }
+        });
+    }
+
 }

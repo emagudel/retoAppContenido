@@ -31,7 +31,7 @@ dependencies {
     implementation("com.devskiller:jfairy:0.6.5")
     implementation("redis.clients:jedis:4.4.3")
     implementation("com.google.firebase:firebase-admin:9.2.0")
-
+    testImplementation 'io.appium:java-client:7.8.1'
 }
 test {
     systemProperties(System.getProperties())
