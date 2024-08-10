@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.21"
+}
+
+group = 'app.automation'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.serenity-bdd:serenity-core:4.0.21'
+    implementation 'net.serenity-bdd:serenity-junit:4.0.21'
+    implementation 'net.serenity-bdd:serenity-screenplay:4.0.21'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:4.0.21'
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:4.0.21'
+    testImplementation 'net.serenity-bdd:serenity-cucumber:4.0.21'
+    implementation 'net.serenity-bdd:serenity-ensure:4.0.21'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.7'
+    implementation 'org.jdbi:jdbi3-core:3.38.1-rc1'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    implementation 'com.amazonaws:aws-java-sdk-logs:1.12.460'
+    implementation group: 'org.json', name: 'json', version: '20230227'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("com.devskiller:jfairy:0.6.5")
+    implementation("redis.clients:jedis:4.4.3")
+    implementation("com.google.firebase:firebase-admin:9.2.0")
+
+}
+test {
+    systemProperties(System.getProperties())
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate)
