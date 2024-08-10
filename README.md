@@ -1,57 +1,55 @@
-# Automatización DeUna
+# Proyecto con  Screenplay Mobile  para Android/iOS - SerenityBDD
+Este repositorio contiene escenarios para el registro de usuarios, donde se realiza el proceso de registro en la app de Ionix para dispositivos móviles realizados bajo el patrón Screenplay.
 
-## Comenzando 🚀
+## Contenido
+- Automatización Screenplay Mobile
+- Detalles Importantes
+- Configuración para Ejecución
+- Notas Importantes
+- Ejecución por Terminal
 
-_Estas instrucciones te permitirán ejecutar la automatización._
+## Automatización Screenplay Mobile
+En la rama principal encontrarás varios features, cada uno con varios escenarios. Esto es porque aunque hacen lo mismo, uno esta desarrollado para que la asersión se realice con las Questions y Excepción creada manualmente y el otro realiza la validación usando [Serenity Ensure](https://serenity-bdd.github.io/theserenitybook/latest/serenity-screenplay-ensure.html "Serenity Ensure") como libreria.
 
-* _Onboarding Express_
+## Detalles Importantes
+La aplicación usada para realizar los ejemplos es **Ionix** . La cual puedes encontrar en la carpeta resource/apps/ donde la puedes descargar, en este caso el .APK para Android .
 
-## Requisitos 🌎
+## Configuración para Ejecución
+El proyecto cuenta con 1 archivo de extensión **.properties** este archivo es donde configuramos los capabilities y dispositivos sobre los cuales se quiere ejecutar la prueba.
 
-* _JAVA 14+_
-* _Gradle 8.1+_
+- **serenity.properties:** Este es por defecto. Al ejecutar por medio del IDE o usando el comando general (Especificado abajo) tomará este archivo para su ejecución. En la parte final del archivo estan los capabilities de iOS. Si quieres usar este por defecto, recuerda comentar o descomentar los capabilities del dispositivo que no será ejecutado.
+
+Para el archivo de serenity los capabilities que deben ser ajustados son los siguientes:
+
+    appium.deviceName =
+    appium.platformVersion =
+
+En el primero va el **Identificador unico** del dispositivo y en el segundo el **número de la versión** que corresponde al Sistema Operativo.
 
 
-## Ejecución de las Pruebas⛷️
+## Notas Importantes
+- Si al ejecutar te falla porque no encuentra los elementos, por favor revisa el idioma de tu dispositivo, esta aplicación ajusta sus localizadores con base al idioma que este configurado, se ha usado Ingles por defecto. Si quieres trabajar en español debes remapear los objetos o bien, cambiar el idioma de tu dispositivo para ejecutar la prueba y funcione con los locators actuales.
 
-Para la ejecución de la tarea debemos tener en cuenta el parámetro
+## Ejecución por Terminal
+Para ejecutar y generar la documentación viva, basta con que por medio de una terminal en la ruta donde esta el proyecto ejecutes la siguiente linea:
 
-* **app**: ID con el cuál se guardó la app (i.e. bs://ed738c851c8006fd7d5c0f00436ef703fe85ea52)
-* **projectName**: nombre del proyecto
-* **buildName**: nombre del release o build
+`gradle clean test aggregate`
 
-### Ejecución en Paralelo de las Pruebas
+Si no cuentas con gradle configurado en tu maquina, usa el wrapper.
 
-```
-gradle clean clearReports test "-Dbstack.app=bs://ed738c851c8006fd7d5c0f00436ef703fe85ea52" "-Dbstack.projectName=OnBoardind" "-Dbstack.buildName=2.0.17" -i
+`./gradlew clean test aggregate`
 
-```
+Con esta instrucción limpias el proyecto de archivos temporales, ejecuta los test y genera la documentación viva.
 
-### Ejecución del set de Prueba de Onboarding Express
+Si deseas ejecutar por medio de terminal usando un **properties especifico** y no el serenity.properties por defecto, puedes hacerlo con el siguiente comando. (Ejemplo, puedes reemplazar el nombre por el properties que desees)
 
-```
-gradle clean clearReports test --tests *Express* "-Dbstack.app=bs://ed738c851c8006fd7d5c0f00436ef703fe85ea52"  "-Dbstack.projectName=OnBoardind" "-Dbstack.buildName=2.0.17" -i
+`gradle clean test -Dproperties="serenityAndroid.properties" aggregate`
 
-```
+o
 
-## Construido con 🏗️
+`./gradlew clean test -Dproperties="serenityAndroid.properties" aggregate`
 
-_Herramientas utilizadas para crear el proyecto_
 
-* [Gradle](https://gradle.org/) - Gradle es una herramienta de automatización de construcción de código abierto
-  que está diseñada para ser lo suficientemente flexible como para construir casi cualquier tipo de software.
+Una vez ejecutado, puedes verificar las evidencias en la ruta:
 
-* [Serenity-BDD](https://serenity-bdd.github.io/) - Es una librería de código abierto que ayuda a escribir pruebas de
-  aceptación automatizadas de mayor calidad y más rápido. Sus principales características son: Escribir test flexibles y
-  fáciles de mantener.
-
-## Versionado 📌
-
-Usamos [Azure Devops](https://BancoPichinchaEC@dev.azure.com/BancoPichinchaEC/CD-BreakingCash/_git/deuna-aut-ap-android) para el versionado del proyecto.
-
-## Contribuir 💪 
-Si deseas contribuir a este proyecto, sigue estos pasos:
-
-1. Haz un fork de este repositorio.
-2. Crea una rama con tu nueva funcionalidad.
-3. Haz tus cambios y realiza un pull request.
+`.../target/site/serenity/index.html`
