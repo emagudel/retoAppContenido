@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun/express.txt",
         },
         snippets = CucumberOptions.SnippetType.CAMELCASE
-        ,tags = "@smoke"
+        ,tags = "@user_registration"
 )
 public class UserRegistrationTest {
 }
